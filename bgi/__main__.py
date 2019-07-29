@@ -10,12 +10,7 @@ from click import UsageError
 from .core import scroll, resolve, set_background, _IS_NATIVE_ENVIRONMENT
 
 _CONFIG_PATH = _pathlib_Path('~/.config/bgi').expanduser()
-
-if not _CONFIG_PATH.exists():
-    _CONFIG_PATH.mkdir()
-
 _DEFAULT_ALIAS_PATH = _CONFIG_PATH / 'alias.json'
-
 
 
 @contextmanager
@@ -23,10 +18,11 @@ def fetch_cache(
     *, write_back: bool = False, dry_run: bool = False, fp: str = _DEFAULT_ALIAS_PATH
 ):
     if not dry_run:
-        path = _pathlib_Path(fp)
+        if not _CONFIG_PATH.exists():
+            _CONFIG_PATH.mkdir()
 
-        if not path.exists():
-            with open(str(path), 'w') as inf:
+        if not _pathlib_Path(fp).exists():
+            with open(fp, 'w') as inf:
                 inf.write(_json_dumps({}))
 
         mode = 'r+' if write_back else 'r'
