@@ -1,15 +1,16 @@
 [tool.poetry]
-name = "niahcloot.bgi"
-version = "0.1.0"
+name = "xbg"
+version = "0.2.0"
 description = "A background image maniplulation tool"
 authors = ["mental <m3nta1@yahoo.com>"]
 
 [tool.poetry.scripts]
-bgi = 'niahcloot.bgi:__main__.main'
+xbg = 'xbg:main'
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.8"
 click = "^7.0"
+toml = "^0.10.0"
 
 [tool.poetry.dev-dependencies]
 
